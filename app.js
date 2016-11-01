@@ -10,6 +10,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+
+app.use(express.static('public'));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 mongoose.connect("mongodb://localhost/diconyong", function(err) {
     if (err) {
         console.log("DB Error!");
@@ -273,6 +280,7 @@ app.post('/set', function(req, res){
 })
 
 
+
 passport.use(new FacebookStrategy({
     clientID: '1008754382587528',
     clientSecret: '9a2de375f9350a74ec30e79f442fbec3',
@@ -289,24 +297,22 @@ passport.use(new FacebookStrategy({
       id: profile.id
     }, function(err, result){
       if(err){
-        console.log(err)
-        throw err
+        console.log("findOne err")
+        //throw err
       }
       if(result){
-        res.json(result)
+        console.log(profile.displayName+" Login")
+        done(null, true, { message: "Login Success!"})
       }
       else{
         user.save(function(err){
           if(err){
-            console.log(err)
-            throw err
+            console.log("save err")
+            //throw err
           }
           else{
-            console.log("Facebook User Save")
-            res.json({
-              success: true,
-              message: "Facebook user save"
-            })
+            console.log(profile.displayName+" Facebook User Save")
+            done(null, true, { message: 'Register Success!'})
           }
         })
       }
@@ -322,5 +328,5 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook',
   {
     successRedirect: '/',
-    failureRedirect: '/auth/login'
+    failureRedirect: '/auth/facebook'
   }));
