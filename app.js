@@ -301,7 +301,7 @@ passport.use(new FacebookStrategy({
         //throw err
       }
       if(result){
-        console.log(profile.displayName+" Login")
+        console.log(profile.displayName+" Facebook Login")
         done(null, true, { message: "Login Success!"})
       }
       else{
