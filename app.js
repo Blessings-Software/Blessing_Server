@@ -287,7 +287,7 @@ passport.use(new FacebookStrategy({
     clientID: '1008754382587528',
     clientSecret: '9a2de375f9350a74ec30e79f442fbec3',
     callbackURL: "/auth/facebook/callback"
-    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified'],
+    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'verified'],
   },
   function(accessToken, refreshToken, profile, done) {
     console.log("email : "+profile.email)
