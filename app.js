@@ -292,11 +292,11 @@ passport.use(new FacebookStrategy({
     console.log("profile : "+profile)
     user = new User({
       username: profile.displayName,
-      id: profile.id
+      id: profile.email
     })
 
     User.findOne({
-      id: profile.id
+      id: profile.email
     }, function(err, result){
       if(err){
         console.log("findOne err")
