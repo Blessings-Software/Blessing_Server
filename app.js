@@ -68,9 +68,7 @@ app.listen(50000, function() {
     console.log("Server Running at 50000 Port")
 })
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook', { scope: ['email', 'public_profile', 'read_stream', 'publish_actions'] })
-);
+
 
 app.get('/', function(req, res) {
     res.send('Dicon Live Background')
@@ -333,8 +331,10 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
+
 app.get('/auth/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', { scope: ['email', 'public_profile', 'read_stream', 'publish_actions'] })
+);
 
 
 app.get('/auth/facebook/callback',
