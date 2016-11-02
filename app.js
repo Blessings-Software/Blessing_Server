@@ -287,9 +287,7 @@ passport.use(new FacebookStrategy({
     callbackURL: "/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("accessToken : "+accessToken)
-    console.log("refreshToken : "+refreshToken)
-    console.log("profile : "+profile)
+    console.log("email : "+profile.email)
     user = new User({
       username: profile.displayName,
       id: profile.email
