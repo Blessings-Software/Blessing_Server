@@ -284,25 +284,26 @@ app.post('/set', function(req, res){
 passport.use(new FacebookStrategy({
     clientID: '1008754382587528',
     clientSecret: '9a2de375f9350a74ec30e79f442fbec3',
-    callbackURL: "/auth/facebook/callback"
+    callbackURL: "/auth/facebook/callback",
     profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'verified'],
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log("email : "+profile.email)
+    console.log(profile)
+    console.log("email : "+profile.emails)
     user = new User({
-      username: profile.displayName,
-      id: profile.email
+      username: profile.familyName+profile.givenName,
+      id: profile.emails
     })
 
     User.findOne({
-      id: profile.email
+      id: profile.emails
     }, function(err, result){
       if(err){
         console.log("findOne err")
         //throw err
       }
       if(result){
-        console.log(profile.displayName+" Facebook Login")
+        console.log(profile.familyName+profile.givenName+" Facebook Login")
         done(null, true, { message: "Login Success!"})
       }
       else{
@@ -312,7 +313,7 @@ passport.use(new FacebookStrategy({
             //throw err
           }
           else{
-            console.log(profile.displayName+" Facebook User Save")
+            console.log(profile.familyName+profile.givenName+" Facebook User Save")
             done(null, true, { message: 'Register Success!'})
           }
         })
