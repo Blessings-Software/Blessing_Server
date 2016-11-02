@@ -68,6 +68,10 @@ app.listen(50000, function() {
     console.log("Server Running at 50000 Port")
 })
 
+app.get('/auth/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'public_profile'] })
+);
+
 app.get('/', function(req, res) {
     res.send('Dicon Live Background')
 })
