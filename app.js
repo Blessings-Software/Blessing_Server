@@ -72,6 +72,10 @@ app.get('/auth/facebook',
   passport.authenticate('facebook', { scope: ['email', 'public_profile'] })
 );
 
+app.get('/auth/facebook',
+  passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
+);
+
 app.get('/', function(req, res) {
     res.send('Dicon Live Background')
 })
