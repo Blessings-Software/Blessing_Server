@@ -3,19 +3,15 @@ var app = express();
 var bodyParser = require('body-parser')//body-parser express미들웨어
 var mongoose = require('mongoose')//MongoDB 연동을 쉽게해줄 mongoose 모듈
 var passport  = require('passport')//토큰인증모듈
-var FacebookStrategy = require('passport-facebook').Strategy;//facebook login
+var FacebookStrategy = require('passport-facebook').Strategy;;//facebook login
 var schema = mongoose.Schema;//스키마 선언
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
-
 app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 mongoose.connect("mongodb://localhost/diconyong", function(err) {//mongodb의 diconyong 데이터베이스를 접근
     if (err) {
@@ -64,12 +60,11 @@ var Setting = mongoose.model('setting',SettingSchema);  //SettingSchema를 이�
 
 var User = mongoose.model('user', UserSchema);  //UserSchema를 이용해 users테이블 선언
 
-app.listen(50000, function() {
+app.listen(50000, function() { //서버 실행
     console.log("Server Running at 50000 Port")
 })
 
-
-/*REST api방식*/
+/*REST ful방식*/
 app.get('/', function(req, res) {
     res.send('Dicon Live Background')
 })
@@ -332,11 +327,9 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-
 app.get('/auth/facebook',
-  passport.authenticate('facebook', { scope: ['email', 'public_profile', 'read_stream', 'publish_actions'] })
+  passport.authenticate('facebook', { scope: ['email', 'public_profile', 'read_stream', 'publish_actions'] })//페이스북에서 받아올 정보 퍼미션 설정
 );
-
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook',
