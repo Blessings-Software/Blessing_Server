@@ -1,10 +1,10 @@
-var express = require('express')
+var express = require('express')//express 모듈선언
 var app = express();
-var bodyParser = require('body-parser')
-var mongoose = require('mongoose')
-var passport  = require('passport')
-var FacebookStrategy = require('passport-facebook').Strategy;
-var schema = mongoose.Schema;
+var bodyParser = require('body-parser')//body-parser express미들웨어
+var mongoose = require('mongoose')//MongoDB 연동을 쉽게해줄 mongoose 모듈
+var passport  = require('passport')//토큰인증모듈
+var FacebookStrategy = require('passport-facebook').Strategy;//facebook login
+var schema = mongoose.Schema;//스키마 선언
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -17,14 +17,14 @@ app.use(passport.session());
 
 
 
-mongoose.connect("mongodb://localhost/diconyong", function(err) {
+mongoose.connect("mongodb://localhost/diconyong", function(err) {//mongodb의 diconyong 데이터베이스를 접근
     if (err) {
         console.log("DB Error!");
         throw err;
     }
 })
 
-var UserSchema = new schema({
+var UserSchema = new schema({ //db collection에 저장할 형식
     username: {
         type: String
     },
@@ -60,16 +60,16 @@ var SettingSchema = new schema({
   }
 })
 
-var Setting = mongoose.model('setting',SettingSchema);
+var Setting = mongoose.model('setting',SettingSchema);  //SettingSchema를 이용해 Settings 테이블 선언
 
-var User = mongoose.model('user', UserSchema);
+var User = mongoose.model('user', UserSchema);  //UserSchema를 이용해 users테이블 선언
 
 app.listen(50000, function() {
     console.log("Server Running at 50000 Port")
 })
 
 
-
+/*REST api방식*/
 app.get('/', function(req, res) {
     res.send('Dicon Live Background')
 })
