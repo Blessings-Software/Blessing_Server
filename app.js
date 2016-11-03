@@ -20,7 +20,7 @@ mongoose.connect("mongodb://localhost/diconyong", function(err) {//mongodb의 di
     }
 })
 
-var UserSchema = new schema({ //db collection에 저장할 형식
+var UserSchema = new schema({ //db collection에 userdata를 저장할 형식
     username: {
         type: String
     },
@@ -32,7 +32,7 @@ var UserSchema = new schema({ //db collection에 저장할 형식
     }
 })
 
-var SettingSchema = new schema({
+var SettingSchema = new schema({ //db collection에 usersetting값을 저장할 형식
   id: {
     type: String
   },
@@ -69,7 +69,7 @@ app.get('/', function(req, res) {
     res.send('Dicon Live Background')
 })
 
-app.post('/login', function(req, res) {
+app.post('/login', function(req, res) { //로그인
     console.log("User Login : " + req.param('id'))
     User.findOne({
         id: req.param('id')
@@ -103,7 +103,7 @@ app.post('/login', function(req, res) {
     })
 })
 
-app.post('/register', function(req, res) {
+app.post('/register', function(req, res) {  //회원가입
     var id = req.param('id');
     var password = req.param('password')
 
@@ -142,7 +142,7 @@ app.post('/register', function(req, res) {
     })
 })
 
-app.post('/remove', function(req, res){
+app.post('/remove', function(req, res){ //계정삭제(setting값도 함께 사라짐)
   console.log("User Login for Delete: " + req.param('id'))
   User.findOne({
       id: req.param('id')
@@ -193,7 +193,7 @@ app.post('/remove', function(req, res){
   })
 })
 
-app.post('/get', function(req, res){
+app.post('/get', function(req, res){ //user setting값을 받아가는 링크
   Setting.findOne({
     id: req.param('id')
   }, function(err, result){
@@ -215,7 +215,7 @@ app.post('/get', function(req, res){
   })
 })
 
-app.post('/set', function(req, res){
+app.post('/set', function(req, res){ //user setting값을 저장하는 함수
 
   setting = new Setting({
     id: req.param('id'),
@@ -276,7 +276,7 @@ app.post('/set', function(req, res){
   })
 })
 
-passport.use(new FacebookStrategy({
+passport.use(new FacebookStrategy({ //facebook 로그인을 위한 토큰 로그인
     clientID: '1008754382587528',
     clientSecret: '9a2de375f9350a74ec30e79f442fbec3',
     callbackURL: "/auth/facebook/callback",
@@ -327,11 +327,11 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-app.get('/auth/facebook',
+app.get('/auth/facebook', //facebook 로그인을 위한 함수 , 로그인 링크 : http://soylatte.kr/auth/facebook
   passport.authenticate('facebook', { scope: ['email', 'public_profile', 'read_stream', 'publish_actions'] })//페이스북에서 받아올 정보 퍼미션 설정
 );
 
-app.get('/auth/facebook/callback',
+app.get('/auth/facebook/callback', //로그인후에 성공, 실패 여부에 따른 리다이렉션(링크이동)
   passport.authenticate('facebook',
   {
     successRedirect: '/',
