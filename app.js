@@ -94,7 +94,7 @@ app.post('/login', function(req, res) { //로그인
                   message: "Login Success"
                 })
             }
-            else if((req.param('password')=="")||(req.param('password')==undefined)||(req.param('password')==null)&&result){
+            else if((req.param('password')=="")||(req.param('password')==undefined)||(req.param('password')==null)){
               console.log(result.username+" User Password Null")
               res.json({
                 success: false,
@@ -109,8 +109,8 @@ app.post('/login', function(req, res) { //로그인
                 })
             }
         }
-         else {
-          console.log('아이디 오류.')
+         else if(!result) {
+          console.log('Account Not Founded.')
             res.json({
                 success: false,
                 message: "ID Error(Account Not Founded)"
