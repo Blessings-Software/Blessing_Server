@@ -127,6 +127,13 @@ app.post('/facebook', function(req, res){
       console.log("/facebook login error")
       throw err
     }
+    else if((req.param('id')=="")||(req.param('id')==undefined)||(req.param('id')==null)){
+      console.log("ID request NULL")
+      res.json({
+        success: false,
+        message: "ID NULL"
+      })
+    }
     if(result){
       res.json({
         success: true,
