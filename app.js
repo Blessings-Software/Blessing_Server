@@ -86,18 +86,19 @@ app.post('/login', function(req, res) { //로그인
                   success: true,
                   message: "Login Success"
                 })
-            } else if (result.password != req.param('password')) {
-                console.log("비밀번호 오류.")
-                res.json({
-                    success: false,
-                    message: "Password Error"
-                })
             }
             else if(req.param('password')==null){
               res.json({
                 success: false,
                 message: "비밀번호가 비어있습니다."
               })
+            }
+            else if (result.password != req.param('password')) {
+                console.log("비밀번호 오류.")
+                res.json({
+                    success: false,
+                    message: "Password Error"
+                })
             }
         } else {
           console.log('아이디 오류.')
