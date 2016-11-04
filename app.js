@@ -88,6 +88,7 @@ app.post('/login', function(req, res) { //로그인
                 })
             }
             else if((req.param('password')=="")||(req.param('password')==undefined)||(req.param('password')==null)){
+              console.log(result.name+" User Password Null")
               res.json({
                 success: false,
                 message: "비밀번호가 비어있습니다."
