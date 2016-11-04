@@ -135,6 +135,7 @@ app.post('/facebook', function(req, res){
       })
     }
     if(result){
+      console.log("facebook user : "+result.username)
       res.json({
         success: true,
         username: result.username,
@@ -142,6 +143,7 @@ app.post('/facebook', function(req, res){
       })
     }
     else if(!((req.param('id')=="")||(req.param('id')==undefined)||(req.param('id')==null))&&!result){
+      console.log("/facebook Account Not Founded")
       res.json({
         success: false,
         message: "Account Not Founded"
