@@ -119,6 +119,30 @@ app.post('/login', function(req, res) { //로그인
     })
 })
 
+app.post('/facebook', function(req, res){
+  User.findOne({
+    id: req.param('id')
+  }, function(err, result){
+    if(err){
+      console.log("/facebook login error")
+      throw err
+    }
+    if(result){
+      res.json({
+        success: true,
+        username: result.username,
+        id: result.id
+      })
+    }
+    else{
+      res.json({
+        success: false,
+        message: "Account Not Founded"
+      })
+    }
+  })
+})
+
 app.post('/register', function(req, res) {  //회원가입
     var id = req.param('id');
     var password = req.param('password')
