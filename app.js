@@ -94,7 +94,7 @@ app.post('/login', function(req, res) { //로그인
                   message: "Login Success"
                 })
             }
-            else if((req.param('password')=="")||(req.param('password')==undefined)||(req.param('password')==null)){
+            else if((req.param('password')=="")||(req.param('password')==undefined)||(req.param('password')==null)&&result){
               console.log(result.username+" User Password Null")
               res.json({
                 success: false,
