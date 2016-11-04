@@ -36,22 +36,13 @@ var SettingSchema = new schema({ //db collection에 usersetting값을 저장할 
   id: {
     type: String
   },
-  desktopstring1: {
+  Youtubeid: {
     type: String
   },
-  desktopstring2: {
+  playedMP3:{
     type: String
   },
-  desktopimage: {
-    type: String
-  },
-  Youtubelist: {
-    type: String
-  },
-  YouTuberecent: {
-    type: String
-  },
-  YoutubeSetting: {
+  YoutubeSearch: {
     type: String
   }
 })
@@ -268,12 +259,9 @@ app.post('/set', function(req, res){ //user setting값을 저장하는 함수
 
   setting = new Setting({
     id: req.param('id'),
-    desktopstring1: req.param('desktopstring1'),
-    desktopstring2: req.param('desktopstring2'),
-    desktopimage: req.param('desktopimage'),
-    Youtubelist: req.param('Youtubelist'),
-    YouTuberecent: req.param('YouTuberecent'),
-    YoutubeSetting: req.param('YoutubeSetting')
+    Youtubeid: req.param('Youtubeid'),
+    playedMP3: req.param('playedMP3'),
+    YoutubeSearch: req.param('YoutubeSearch')
   })
 
   Setting.findOne({
