@@ -109,7 +109,7 @@ app.post('/login', function(req, res) { //로그인
                 })
             }
         }
-         else if(!result) {
+         else if(!(((req.param('id')=="")||(req.param('id')==undefined)||(req.param('id')==null)))&&!result) {
           console.log('Account Not Founded.')
             res.json({
                 success: false,
