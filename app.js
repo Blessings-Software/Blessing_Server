@@ -62,14 +62,14 @@ app.get('/', function(req, res) {
 
 app.post('/login', function(req, res) { //로그인
     console.log("User Login : " + req.param('id'))
-    User.findOne({
+    User.findOne({//id값으로 유저검색
         id: req.param('id')
     }, function(err, result) {
         if (err) {
             console.log("/auth/login failed")
             throw err
         }
-        else if((req.param('id')=="")||(req.param('id')==undefined)||(req.param('id')==null)){
+        else if((req.param('id')=="")||(req.param('id')==undefined)||(req.param('id')==null)){//아이디가 공란일경우
           console.log("ID request NULL")
           res.json({
             success: false,
@@ -85,7 +85,7 @@ app.post('/login', function(req, res) { //로그인
                   message: "Login Success"
                 })
             }
-            else if((req.param('password')=="")||(req.param('password')==undefined)||(req.param('password')==null)){
+            else if((req.param('password')=="")||(req.param('password')==undefined)||(req.param('password')==null)){// 비밀번호란이 비어있을경우
               console.log(result.username+" User Password Null")
               res.json({
                 success: false,
@@ -110,7 +110,7 @@ app.post('/login', function(req, res) { //로그인
     })
 })
 
-app.post('/facebook', function(req, res){
+app.post('/facebook', function(req, res){//페이스북 로그인 링크
   User.findOne({
     id: req.param('id')
   }, function(err, result){
@@ -255,7 +255,7 @@ app.post('/get', function(req, res){ //user setting값을 받아가는 링크
   })
 })
 
-app.post('/set', function(req, res){ //user setting값을 저장하는 함수
+app.post('/set', function(req, res){ //user setting값을 저장하는 링크
 
   setting = new Setting({
     id: req.param('id'),
