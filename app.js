@@ -66,7 +66,7 @@ app.listen(50000, function() { //서버 실행
 
 /*REST ful방식*/
 app.get('/', function(req, res) {
-    res.send('Dicon Live Background')
+    res.send('Facebook 회원가입 완료.\n이메일로 로그인 하세요')
 })
 
 app.post('/login', function(req, res) { //로그인
