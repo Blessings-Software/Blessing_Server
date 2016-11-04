@@ -78,6 +78,12 @@ app.post('/login', function(req, res) { //로그인
             console.log("/auth/login failed")
             throw err
         }
+        else if(req.param('password')==null){
+          res.json({
+            success: false,
+            message: "비밀번호가 비어있습니다."
+          })
+        }
         console.log("DB Founded : " + result)
         if (result) {
             if (result.password == req.param('password')) {
@@ -86,12 +92,6 @@ app.post('/login', function(req, res) { //로그인
                   success: true,
                   message: "Login Success"
                 })
-            }
-            else if(req.param('password')==null){
-              res.json({
-                success: false,
-                message: "비밀번호가 비어있습니다."
-              })
             }
             else if (result.password != req.param('password')) {
                 console.log("비밀번호 오류.")
