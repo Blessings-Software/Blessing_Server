@@ -116,13 +116,6 @@ app.post('/login', function(req, res) { //로그인
                 message: "ID Error(Account Not Founded)"
             })
         }
-        else if(((req.param('id')=="")||(req.param('id')==undefined)||(req.param('id')==null))&&((req.param('password')=="")||(req.param('password')==undefined)||(req.param('password')==null))){
-          console.log("NULL")
-          res.json({
-            success: false,
-            message: "ID, Password NULL"
-          })
-        }
     })
 })
 
