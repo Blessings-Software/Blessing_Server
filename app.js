@@ -202,8 +202,7 @@ app.post('/remove', function(req, res){ //계정삭제(setting값도 함께 사�
                 else{
                   console.log('User '+ result.username + ' Delete Success!')
                 }
-              }
-              )
+              })
               Setting.remove({id: result.id}, function(err){
                 if(err){
                   console.log('/remove Setting Delete Err')
@@ -335,8 +334,8 @@ passport.use(new FacebookStrategy({ //facebook 로그인을 위한 토큰 로그
         //throw err
       }
       if(result){
-        console.log(profile.familyName+profile.givenName+" Facebook Login")
-        done(null, true, { message: "Login Success!"})
+        console.log(profile.name.familyName+profile.name.givenName+" Facebook Login")
+        done(null, true)
       }
       else{
         user.save(function(err){
@@ -346,7 +345,7 @@ passport.use(new FacebookStrategy({ //facebook 로그인을 위한 토큰 로그
           }
           else{
             console.log(profile.familyName+profile.givenName+" Facebook User Save")
-            done(null, true, { message: 'Register Success!'})
+            done(null, true)
           }
         })
       }
@@ -371,6 +370,6 @@ app.get('/auth/facebook', //facebook 로그인을 위한 함수 , 로그인 링�
 app.get('/auth/facebook/callback', //로그인후에 성공, 실패 여부에 따른 리다이렉션(링크이동)
   passport.authenticate('facebook',
   {
-    successRedirect: '/',
+    successRedirect: '/main',
     failureRedirect: '/auth/facebook'
   }));
